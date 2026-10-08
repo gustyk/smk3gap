@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { 
   AuditProject, 
   AuditTier, 
@@ -13,12 +13,11 @@ import {
 import { SMK3_ELEMENTS, SMK3_CRITERIA } from '@/lib/data/smk3-data';
 import { calculateScores, getApplicableCriteria } from '@/lib/scoring';
 import { 
-  loadProject, 
-  saveProject, 
   createInitialProject, 
   exportProjectToJson, 
   calculateDefaultDueDate 
 } from '@/lib/storage';
+import { loadLatestProjectDb, saveProjectToDb } from '@/app/actions';
 import { exportAuditToExcel } from '@/lib/excel-export';
 
 import { Navbar } from '@/components/Navbar';
@@ -52,16 +51,25 @@ export default function HomePage() {
   // Inspector Panel State
   const [isInspectorOpen, setIsInspectorOpen] = useState<boolean>(true);
 
-  // Load from LocalStorage on mount
+  const saveTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Load from DB on mount
   useEffect(() => {
-    const p = loadProject();
-    setProject(p);
+    let mounted = true;
+    loadLatestProjectDb().then(p => {
+      if (mounted) setProject(p);
+    });
+    return () => { mounted = false; };
   }, []);
 
-  // Save changes to LocalStorage whenever project updates
+  // Save changes to DB with debounce
   const updateProject = useCallback((newProject: AuditProject) => {
     setProject(newProject);
-    saveProject(newProject);
+    
+    if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
+    saveTimerRef.current = setTimeout(() => {
+      saveProjectToDb(newProject).catch(e => console.error("DB Save failed:", e));
+    }, 1000);
   }, []);
 
   // Calculate live compliance scores

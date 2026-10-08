@@ -39,3 +39,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+AGENT_APPLICATION_HOSTING_GUIDE.md

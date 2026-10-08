@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  smk3gap:
+    build: .
+    container_name: smk3gap_app
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://smk3gap_user:sMk3_s3cr3t_DB_p4ss!@pg-shared:5432/smk3gap?schema=public
+    networks:
+      - coolify
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.smk3gap.rule=Host(`43.173.9.159`)"
+      - "traefik.http.services.smk3gap.loadbalancer.server.port=3000"
+
+networks:
+  coolify:
+    external: true

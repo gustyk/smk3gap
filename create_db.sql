@@ -1,0 +1,1 @@
+CREATE USER smk3gap_user WITH ENCRYPTED PASSWORD 'sMk3_s3cr3t_DB_p4ss!'; CREATE DATABASE smk3gap OWNER smk3gap_user;
