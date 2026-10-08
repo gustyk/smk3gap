@@ -1,52 +1,105 @@
+
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Warm neutral canvas & surfaces (Linear / Stripe / GOV.UK style) */
+  --canvas: #F7F6F3;
+  --surface: #FFFFFF;
+  --sunken: #EFEDE8;
+
+  /* Ink scale */
+  --ink-900: #1C1B19;
+  --ink-700: #3F3D39;
+  --ink-500: #6B6862;
+  --ink-400: #8F8C85;
+
+  /* Hairline Borders */
+  --border-subtle: #E4E1DA;
+  --border-default: #D3CFC6;
+  --border-strong: #A8A398;
+
+  /* Single Accent: Deep Teal */
+  --accent: #0F4C5C;
+  --accent-hover: #0B3A47;
+  --accent-tint: #E3EEF0;
+
+  /* Semantic status pairs (solid + tint, contrast >= 4.5:1) */
+  --status-compliant-solid: #2F6B3F;
+  --status-compliant-tint: #E6F0E8;
+  --status-compliant-border: #B8D4BF;
+
+  --status-partial-solid: #8A5A00;
+  --status-partial-tint: #F6EBD3;
+  --status-partial-border: #E8D5A7;
+
+  --status-noncompliant-solid: #A12D2D;
+  --status-noncompliant-tint: #F6E1E0;
+  --status-noncompliant-border: #E5BFBE;
+
+  --status-unassessed-solid: #6B6862;
+  --status-unassessed-tint: #EFEDE8;
+  --status-unassessed-border: #E4E1DA;
+
+  /* Fonts */
+  --font-ui: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--canvas);
+  color: var(--ink-900);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  line-height: 1.4;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Tabular numbers for all score displays and codes */
-.font-mono, [data-tabular="true"] {
-  font-feature-settings: "tnum";
+/* Numeric tabular styling */
+.font-mono, [data-tabular="true"], td, th {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum" 1;
 }
 
-/* Custom slick scrollbars */
+/* Accessibility keyboard focus ring */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accent), 0 0 0 4px var(--canvas);
+}
+
+/* No box-shadow on content cards/panels per Design Principle */
+.no-shadow {
+  box-shadow: none !important;
+}
+
+/* Scrollbars: minimal, straight 2px radius */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
-
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: var(--sunken);
 }
-
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 9999px;
+  background: var(--border-default);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+/* Micro copy label style */
+.label-xs {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-500);
+  font-weight: 500;
 }

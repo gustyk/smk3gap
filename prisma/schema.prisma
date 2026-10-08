@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AuditProject {
+  id            String   @id @default(cuid())
+  companyName   String
+  industryType  String
+  riskLevel     String   @default("HIGH") // LOW, MEDIUM, HIGH
+  employeeCount Int      @default(0)
+  leadAuditor   String
+  auditDate     String
+  auditTier     String   @default("lanjutan") // awal, transisi, lanjutan
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  assessments   CriteriaAssessment[]
+  capItems      CapItem[]
+}
+
+model CriteriaAssessment {
+  id             String   @id @default(cuid())
+  projectId      String
+  criteriaCode   String
+  status         String   @default("UNASSESSED") // COMPLIANT, OFI, MINOR, MAJOR, CRITICAL, NA, UNASSESSED
+  findingNotes   String?  @db.Text
+  updatedAt      DateTime @updatedAt
+
+  project        AuditProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, criteriaCode])
+}
+
+model CapItem {
+  id               String   @id @default(cuid())
+  projectId        String
+  criteriaCode     String
+  rootCause        String?  @db.Text
+  correctiveAction String?  @db.Text
+  preventiveAction String?  @db.Text
+  pic              String?
+  dueDate          String?
+  status           String   @default("OPEN") // OPEN, IN_PROGRESS, RESOLVED, VERIFIED
+
+  project          AuditProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, criteriaCode])
+}

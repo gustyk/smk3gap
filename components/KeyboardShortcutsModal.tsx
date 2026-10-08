@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { X, Keyboard, Command } from 'lucide-react';
+import { X, Keyboard } from 'lucide-react';
 
 interface KeyboardShortcutsModalProps {
   isOpen: boolean;
@@ -10,82 +10,96 @@ interface KeyboardShortcutsModalProps {
 
 export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
   isOpen,
-  onClose
+  onClose,
 }) => {
   if (!isOpen) return null;
 
-  const shortcuts = [
+  const sections = [
     {
-      category: 'Navigasi Kriteria',
+      title: 'Navigasi Baris Kriteria',
       items: [
-        { key: 'J atau ↓', label: 'Pindah ke Kriteria Berikutnya' },
-        { key: 'K atau ↑', label: 'Pindah ke Kriteria Sebelumnya' },
-        { key: 'I', label: 'Buka / Tutup Drawer Inspeksi Klausul' },
-        { key: 'Esc', label: 'Tutup Drawer / Modal Dialog' },
+        { keys: ['J', '↓'], label: 'Pindah ke baris berikutnya' },
+        { keys: ['K', '↑'], label: 'Pindah ke baris sebelumnya' },
+        { keys: ['N'], label: 'Fokus ke kolom catatan temuan (textarea)' },
+        { keys: ['I'], label: 'Buka / tutup panel Inspector kanan' },
+        { keys: ['Esc'], label: 'Tutup panel / modal aktif' },
       ]
     },
     {
-      category: 'Penetapan Nilai Cepat (Quick Scoring)',
+      title: 'Penetapan Nilai (Quick Scoring)',
       items: [
-        { key: '1', label: 'Tetapkan status: Komplian (Patuh) [Skor: 1]' },
-        { key: '2', label: 'Tetapkan status: Peluang Peningkatan (OFI) [Skor: 1]' },
-        { key: '3', label: 'Tetapkan status: Temuan Minor [Skor: 0]' },
-        { key: '4', label: 'Tetapkan status: Temuan Mayor [Skor: 0]' },
-        { key: '5', label: 'Tetapkan status: Temuan Kritikal [Skor: 0]' },
-        { key: '6', label: 'Tetapkan status: Tidak Berlaku (N/A) [Exclude]' },
+        { keys: ['1'], label: 'Status: Sesuai / Komplian' },
+        { keys: ['2'], label: 'Status: OFI (Peluang Peningkatan)' },
+        { keys: ['3'], label: 'Status: Temuan Minor' },
+        { keys: ['4'], label: 'Status: Temuan Mayor' },
+        { keys: ['5'], label: 'Status: Temuan Kritikal' },
+        { keys: ['6'], label: 'Status: Tidak Berlaku (N/A)' },
       ]
     },
     {
-      category: 'Tampilan & Sistem',
+      title: 'Navigasi Elemen & Tampilan',
       items: [
-        { key: 'D', label: 'Ubah Kepadatan Tampilan (Compact / Comfortable)' },
-        { key: '?', label: 'Buka Panduan Pintasan Keyboard ini' },
+        { keys: ['['], label: 'Pindah ke Elemen sebelumnya' },
+        { keys: [']'], label: 'Pindah ke Elemen berikutnya' },
+        { keys: ['D'], label: 'Beralih mode Kompak / Nyaman' },
+        { keys: ['⌘K', 'Ctrl+K'], label: 'Buka Command Palette (lompat klausul)' },
+        { keys: ['?'], label: 'Buka panduan pintasan keyboard ini' },
       ]
     }
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-150">
-      <div 
-        className="bg-white rounded-2xl max-w-lg w-full shadow-2xl border border-slate-200 overflow-hidden"
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40"
+      onClick={onClose}
+    >
+      <div
+        className="w-full max-w-md bg-[var(--surface)] border border-[var(--border-default)] rounded-[6px] shadow-[0_8px_24px_rgba(0,0,0,0.12)] overflow-hidden"
+        onClick={e => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
+        aria-label="Pintasan Keyboard"
       >
-        <div className="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="p-2 bg-slate-900 text-white rounded-lg">
-              <Keyboard className="w-5 h-5" />
-            </div>
-            <div>
-              <h2 className="text-base font-bold text-slate-900">
-                Pintasan Keyboard (Auditor Hotkeys)
-              </h2>
-              <p className="text-xs text-slate-500">
-                Akselerasi audit kecepatan tinggi tanpa melepas tangan dari keyboard
-              </p>
-            </div>
+        {/* Header */}
+        <div className="h-[44px] px-4 bg-[var(--sunken)] border-b border-[var(--border-default)] flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Keyboard size={14} className="text-[var(--ink-500)]" />
+            <span className="label-xs text-[11px] font-semibold uppercase tracking-wider text-[var(--ink-700)]">
+              Pintasan Keyboard
+            </span>
           </div>
           <button
+            type="button"
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-slate-200/50 transition-colors"
+            className="p-1 rounded-[3px] text-[var(--ink-400)] hover:text-[var(--ink-900)] hover:bg-[var(--border-subtle)] transition-colors cursor-pointer"
           >
-            <X className="w-5 h-5" />
+            <X size={15} />
           </button>
         </div>
 
-        <div className="p-6 space-y-5 max-h-[75vh] overflow-y-auto">
-          {shortcuts.map((sec, idx) => (
-            <div key={idx} className="space-y-2.5">
-              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-                {sec.category}
-              </h3>
-              <div className="bg-slate-50 rounded-xl border border-slate-200/80 divide-y divide-slate-100">
-                {sec.items.map((item, i) => (
-                  <div key={i} className="px-3.5 py-2.5 flex items-center justify-between text-xs">
-                    <span className="text-slate-700 font-medium">{item.label}</span>
-                    <kbd className="px-2.5 py-1 bg-white border border-slate-300 rounded-md font-mono text-slate-800 font-bold shadow-2xs text-[11px]">
-                      {item.key}
-                    </kbd>
+        {/* Content */}
+        <div className="max-h-[70vh] overflow-y-auto py-2 divide-y divide-[var(--border-subtle)]">
+          {sections.map((section) => (
+            <div key={section.title} className="px-4 py-3">
+              <span className="label-xs block mb-2 text-[10px] font-semibold uppercase tracking-wider text-[var(--ink-400)]">
+                {section.title}
+              </span>
+              <div className="space-y-1">
+                {section.items.map((item, idx) => (
+                  <div key={idx} className="flex items-center justify-between text-[12px] py-0.5">
+                    <span className="text-[var(--ink-700)]">{item.label}</span>
+                    <div className="flex items-center gap-1 shrink-0">
+                      {item.keys.map((key, ki) => (
+                        <React.Fragment key={ki}>
+                          <kbd className="px-1.5 py-0.5 font-mono text-[11px] text-[var(--ink-900)] bg-[var(--sunken)] border border-[var(--border-default)] rounded-[3px]">
+                            {key}
+                          </kbd>
+                          {ki < item.keys.length - 1 && (
+                            <span className="text-[var(--ink-400)] text-[10px]">/</span>
+                          )}
+                        </React.Fragment>
+                      ))}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -93,11 +107,15 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
           ))}
         </div>
 
-        <div className="px-6 py-3.5 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
-          <span>Tekan <kbd className="px-1.5 py-0.5 bg-white border border-slate-300 rounded font-mono text-[10px]">Esc</kbd> kapan saja untuk menutup</span>
+        {/* Footer */}
+        <div className="px-4 py-2.5 bg-[var(--sunken)] border-t border-[var(--border-subtle)] flex items-center justify-between text-[11px]">
+          <span className="text-[var(--ink-500)]">
+            Tekan <kbd className="px-1 py-0.5 font-mono text-[10px] border border-[var(--border-default)] rounded-[2px] bg-[var(--surface)]">Esc</kbd> untuk menutup
+          </span>
           <button
+            type="button"
             onClick={onClose}
-            className="px-4 py-1.5 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800 transition-colors"
+            className="h-[26px] px-3 text-[11px] font-medium text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] rounded-[3px] transition-colors cursor-pointer"
           >
             Mengerti
           </button>
