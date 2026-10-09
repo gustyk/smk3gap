@@ -12,7 +12,9 @@ services:
       - coolify
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.smk3gap.rule=Host(`43.173.9.159`)"
+      - "traefik.http.routers.smk3gap.rule=Host(`gap.smk3app.my.id`)"
+      - "traefik.http.routers.smk3gap.entrypoints=https"
+      - "traefik.http.routers.smk3gap.tls.certresolver=letsencrypt"
       - "traefik.http.services.smk3gap.loadbalancer.server.port=3000"
 
 networks:
