@@ -86,93 +86,7 @@ export const CriteriaDrawer: React.FC<CriteriaDrawerProps> = ({
             </div>
 
             <div className="flex items-center gap-1.5">
-              <button
-                type="button"
-                disabled={!hasPrev}
-                onClick={onPrevCriteria}
-                title="Klausul Sebelumnya (K)"
-                className="p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button
-                type="button"
-                disabled={!hasNext}
-                onClick={onNextCriteria}
-                title="Klausul Selanjutnya (J)"
-                className="p-1.5 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
-              <button
-                type="button"
-                onClick={onClose}
-                className="p-1.5 ml-2 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-
-          {/* Subheader & Clause Text */}
-          <div className="px-6 py-4 border-b border-slate-100 bg-white shrink-0">
-            <div className="flex items-center gap-2 mb-1.5">
-              <span className="text-xs font-bold text-slate-500">
-                Sub-Elemen: {criteria.subElementName}
-              </span>
-              <div className="flex items-center gap-1 ml-auto">
-                {criteria.tiers.awal && (
-                  <span className="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-1.5 py-0.2 rounded-xs">
-                    Awal
-                  </span>
-                )}
-                {criteria.tiers.transisi && (
-                  <span className="text-[10px] font-bold bg-teal-100 text-teal-800 px-1.5 py-0.2 rounded-xs">
-                    Transisi
-                  </span>
-                )}
-                <span className="text-[10px] font-bold bg-slate-100 text-slate-600 px-1.5 py-0.2 rounded-xs">
-                  Lanjutan
-                </span>
-              </div>
-            </div>
-
-            <p className="text-sm font-semibold text-slate-900 leading-relaxed">
-              {criteria.clauseText}
-            </p>
-          </div>
-
-          {/* Status Selection Strip */}
-          <div className="px-6 py-3 bg-slate-50/80 border-b border-slate-200 shrink-0">
-            <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">
-              Tetapkan Status Pemenuhan (Hotkeys: 1 - 6):
-            </span>
-            <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
-              <button
-                type="button"
-                onClick={() => handleStatusChange('COMPLIANT')}
-                className={`px-2 py-1.5 rounded-lg text-xs font-bold transition-all border text-center ${
-                  currentStatus === 'COMPLIANT'
-                    ? 'bg-emerald-600 text-white border-emerald-600 shadow-xs ring-2 ring-emerald-500/20'
-                    : 'bg-white text-emerald-700 border-emerald-300 hover:bg-emerald-50'
-                }`}
-              >
-                <div>Komplian</div>
-                <div className="text-[10px] opacity-80">[1]</div>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleStatusChange('OFI')}
-                className={`px-2 py-1.5 rounded-lg text-xs font-bold transition-all border text-center ${
-                  currentStatus === 'OFI'
-                    ? 'bg-sky-600 text-white border-sky-600 shadow-xs ring-2 ring-sky-500/20'
-                    : 'bg-white text-sky-700 border-sky-300 hover:bg-sky-50'
-                }`}
-              >
-                <div>OFI</div>
-                <div className="text-[10px] opacity-80">[2]</div>
-              </button>
+              
 
               <button
                 type="button"
@@ -318,14 +232,7 @@ export const CriteriaDrawer: React.FC<CriteriaDrawerProps> = ({
                   <p className="mt-1 leading-relaxed">{criteria.conditions.compliant}</p>
                 </div>
 
-                {criteria.conditions.ofi && (
-                  <div className="p-3 rounded-lg bg-sky-50 border border-sky-200 text-xs text-sky-900">
-                    <span className="font-bold block text-[11px] text-sky-800 uppercase tracking-wide">
-                      💡 Peluang Peningkatan (OFI):
-                    </span>
-                    <p className="mt-1 leading-relaxed">{criteria.conditions.ofi}</p>
-                  </div>
-                )}
+                
 
                 <div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-900">
                   <span className="font-bold block text-[11px] text-amber-800 uppercase tracking-wide">

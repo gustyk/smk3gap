@@ -29,7 +29,6 @@ interface CriteriaAreaProps {
     minor: number;
     major: number;
     critical: number;
-    ofi: number;
     na: number;
     rate: number;
   } | null;
@@ -101,7 +100,6 @@ export const CriteriaArea: React.FC<CriteriaAreaProps> = ({
           const st = assessments[c.code]?.status || 'UNASSESSED';
           let color = 'var(--border-subtle)';
           if (st === 'COMPLIANT') color = 'var(--status-compliant-solid)';
-          else if (st === 'OFI') color = 'var(--status-partial-solid)';
           else if (st === 'MINOR') color = 'var(--status-partial-solid)';
           else if (st === 'MAJOR') color = '#B45309';
           else if (st === 'CRITICAL') color = 'var(--status-noncompliant-solid)';
@@ -157,7 +155,7 @@ export const CriteriaArea: React.FC<CriteriaAreaProps> = ({
           >
             <option value="ALL">Semua</option>
             <option value="UNASSESSED">Belum Dinilai</option>
-            <option value="COMPLIANT">Sesuai / OFI</option>
+            <option value="COMPLIANT">Memenuhi</option>
             <option value="GAP">Temuan Gap</option>
             <option value="NA">N/A</option>
           </select>
@@ -252,7 +250,7 @@ export const CriteriaArea: React.FC<CriteriaAreaProps> = ({
       <div className="shrink-0 h-[24px] px-3 border-t border-[var(--border-subtle)] bg-[var(--sunken)] flex items-center gap-3 text-[10px] font-mono text-[var(--ink-400)] select-none">
         <Keyboard size={10} />
         <span>J/K pindah</span>
-        <span>1–6 nilai</span>
+        <span>1–5 nilai</span>
         <span>N catatan</span>
         <span>I inspeksi</span>
         <span>[ ] elemen</span>

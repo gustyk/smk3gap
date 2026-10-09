@@ -13,12 +13,11 @@ interface SegmentedStatusProps {
 }
 
 const STATUS_OPTIONS: { key: FindingStatusKey; label: string; shortcut: string }[] = [
-  { key: 'COMPLIANT', label: 'Sesuai', shortcut: '1' },
-  { key: 'OFI', label: 'OFI', shortcut: '2' },
-  { key: 'MINOR', label: 'Minor', shortcut: '3' },
-  { key: 'MAJOR', label: 'Mayor', shortcut: '4' },
-  { key: 'CRITICAL', label: 'Kritis', shortcut: '5' },
-  { key: 'NA', label: 'N/A', shortcut: '6' },
+  { key: 'COMPLIANT', label: 'Memenuhi', shortcut: '1' },
+  { key: 'CRITICAL', label: 'Kritikal', shortcut: '2' },
+  { key: 'MAJOR', label: 'Mayor', shortcut: '3' },
+  { key: 'MINOR', label: 'Minor', shortcut: '4' },
+  { key: 'NA', label: 'N/A', shortcut: '5' },
 ];
 
 export const SegmentedStatus: React.FC<SegmentedStatusProps> = ({

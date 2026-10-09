@@ -89,15 +89,9 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
 
         <div className="mt-3 flex items-center gap-4 text-[12px] text-[var(--ink-500)]">
           <div>
-            <span className="font-mono font-bold text-[var(--ink-900)] tabular-nums">{score.totalCompliant - score.totalOfi}</span>
-            <span className="ml-1">sesuai</span>
+            <span className="font-mono font-bold text-[var(--ink-900)] tabular-nums">{score.totalCompliant}</span>
+            <span className="ml-1">memenuhi</span>
           </div>
-          <span className="text-[var(--border-strong)]">·</span>
-          <div>
-            <span className="font-mono font-bold text-[var(--ink-900)] tabular-nums">{score.totalOfi}</span>
-            <span className="ml-1">OFI</span>
-          </div>
-          <span className="text-[var(--border-strong)]">·</span>
           <div className="flex items-center gap-1">
             <Circle size={10} className="fill-[var(--status-partial-solid)] text-transparent" />
             <span className="font-mono font-bold text-[var(--status-partial-solid)] tabular-nums">{score.totalMinor}</span>

@@ -29,8 +29,7 @@ export const TOKENS = {
 
     // Semantic status pairs (solid + tint)
     status: {
-      compliant: { solid: '#2F6B3F', tint: '#E6F0E8', label: 'Sesuai' },
-      ofi: { solid: '#8A5A00', tint: '#F6EBD3', label: 'OFI' },
+      compliant: { solid: '#2F6B3F', tint: '#E6F0E8', label: 'Memenuhi' },
       minor: { solid: '#8A5A00', tint: '#F6EBD3', label: 'Minor' },
       major: { solid: '#A12D2D', tint: '#F6E1E0', label: 'Mayor' },
       critical: { solid: '#A12D2D', tint: '#F6E1E0', label: 'Kritikal' },
@@ -86,7 +85,6 @@ export const TOKENS = {
 
 export type FindingStatusKey = 
   | 'COMPLIANT' 
-  | 'OFI' 
   | 'MINOR' 
   | 'MAJOR' 
   | 'CRITICAL' 
@@ -102,20 +100,12 @@ export const STATUS_META: Record<FindingStatusKey, {
   border: string;
 }> = {
   COMPLIANT: {
-    label: 'Sesuai',
+    label: 'Memenuhi',
     shortcut: '1',
     scoreLabel: '1',
     solid: '#2F6B3F',
     tint: '#E6F0E8',
     border: '#B8D4BF',
-  },
-  OFI: {
-    label: 'OFI',
-    shortcut: '2',
-    scoreLabel: '1',
-    solid: '#8A5A00',
-    tint: '#F6EBD3',
-    border: '#E8D5A7',
   },
   MINOR: {
     label: 'Minor',

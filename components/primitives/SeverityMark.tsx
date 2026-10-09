@@ -62,18 +62,7 @@ export const SeverityMark: React.FC<SeverityMarkProps> = ({
           title="Komplian - Seluruh Persyaratan Terpenuhi (Skor: 1)"
         >
           {showIcon && <CheckCircle2 size={iconSize} className="shrink-0" strokeWidth={1.5} />}
-          <span className="font-semibold uppercase tracking-wider text-[11px]">Sesuai</span>
-        </span>
-      );
-
-    case 'OFI':
-      return (
-        <span 
-          className={`inline-flex items-center gap-1.5 font-medium text-[var(--status-partial-solid)] ${className}`}
-          title="OFI - Peluang Peningkatan Kualitas (Skor: 1)"
-        >
-          {showIcon && <HelpCircle size={iconSize} className="shrink-0" strokeWidth={1.5} />}
-          <span className="font-semibold uppercase tracking-wider text-[11px]">OFI</span>
+          <span className="font-semibold uppercase tracking-wider text-[11px]">Memenuhi</span>
         </span>
       );
 

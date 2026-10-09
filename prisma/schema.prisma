@@ -27,7 +27,7 @@ model CriteriaAssessment {
   id             String   @id @default(cuid())
   projectId      String
   criteriaCode   String
-  status         String   @default("UNASSESSED") // COMPLIANT, OFI, MINOR, MAJOR, CRITICAL, NA, UNASSESSED
+  status         String   @default("UNASSESSED") // COMPLIANT, MINOR, MAJOR, CRITICAL, NA, UNASSESSED
   findingNotes   String?  @db.Text
   updatedAt      DateTime @updatedAt
 

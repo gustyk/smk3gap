@@ -19,7 +19,6 @@ export function calculateScores(
   let totalMinor = 0;
   let totalMajor = 0;
   let totalCritical = 0;
-  let totalOfi = 0;
   let totalNA = 0;
   let totalUnassessed = 0;
 
@@ -31,7 +30,6 @@ export function calculateScores(
       minor: 0,
       major: 0,
       critical: 0,
-      ofi: 0,
       na: 0,
       rate: 0
     };
@@ -47,12 +45,6 @@ export function calculateScores(
     switch (status) {
       case 'COMPLIANT':
         totalCompliant++;
-        elementScores[elem].compliant++;
-        break;
-      case 'OFI':
-        totalOfi++;
-        totalCompliant++; // Counts as fulfilled in compliance calculation
-        elementScores[elem].ofi++;
         elementScores[elem].compliant++;
         break;
       case 'MINOR':
@@ -126,7 +118,6 @@ export function calculateScores(
     totalMinor,
     totalMajor,
     totalCritical,
-    totalOfi,
     totalNA,
     totalUnassessed,
     complianceRate,

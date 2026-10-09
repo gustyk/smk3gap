@@ -68,9 +68,8 @@ export const DataTable: React.FC<DataTableProps> = ({
         MAJOR: 2,
         MINOR: 3,
         COMPLIANT: 4,
-        OFI: 5,
-        NA: 6,
-        UNASSESSED: 7
+        NA: 5,
+        UNASSESSED: 6
       };
       comparison = (order[a.severity] || 99) - (order[b.severity] || 99);
     } else if (sortField === 'dueDate') {

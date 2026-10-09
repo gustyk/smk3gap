@@ -97,7 +97,7 @@ export default function HomePage() {
 
       // Status Filter
       if (statusFilter === 'UNASSESSED' && status !== 'UNASSESSED') return false;
-      if (statusFilter === 'COMPLIANT' && (status !== 'COMPLIANT' && status !== 'OFI')) return false;
+      if (statusFilter === 'COMPLIANT' && status !== 'COMPLIANT') return false;
       if (statusFilter === 'GAP' && (status !== 'CRITICAL' && status !== 'MAJOR' && status !== 'MINOR')) return false;
       if (statusFilter === 'NA' && status !== 'NA') return false;
 
@@ -312,10 +312,10 @@ export default function HomePage() {
             const el = document.getElementById(`notes-${activeCriteriaCode.replace(/\./g, '-')}`);
             el?.focus();
           }
-        } else if (activeCriteriaCode && ['1', '2', '3', '4', '5', '6'].includes(e.key)) {
+        } else if (activeCriteriaCode && ['1', '2', '3', '4', '5'].includes(e.key)) {
           e.preventDefault();
           const statusMap: Record<string, FindingStatus> = {
-            '1': 'COMPLIANT', '2': 'OFI', '3': 'MINOR', '4': 'MAJOR', '5': 'CRITICAL', '6': 'NA'
+            '1': 'COMPLIANT', '2': 'CRITICAL', '3': 'MAJOR', '4': 'MINOR', '5': 'NA'
           };
           handleUpdateAssessment(activeCriteriaCode, { status: statusMap[e.key] });
           

@@ -5,7 +5,6 @@ export type FindingStatus =
   | 'MINOR' 
   | 'MAJOR' 
   | 'CRITICAL' 
-  | 'OFI' 
   | 'NA' 
   | 'UNASSESSED';
 
@@ -14,7 +13,7 @@ export interface CriteriaConditions {
   critical: string;
   major: string;
   minor: string;
-  ofi: string;
+  ofi?: string;
 }
 
 export interface CriteriaTiers {
@@ -91,11 +90,10 @@ export interface AuditProject {
 
 export interface ScoreSummary {
   totalApplicable: number;
-  totalCompliant: number; // Includes COMPLIANT + OFI
+  totalCompliant: number;
   totalMinor: number;
   totalMajor: number;
   totalCritical: number;
-  totalOfi: number;
   totalNA: number;
   totalUnassessed: number;
   complianceRate: number; // in percentage (0 - 100)
@@ -110,7 +108,6 @@ export interface ScoreSummary {
     minor: number;
     major: number;
     critical: number;
-    ofi: number;
     na: number;
     rate: number;
   }>;

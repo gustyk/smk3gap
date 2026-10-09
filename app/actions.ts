@@ -27,7 +27,7 @@ export async function loadLatestProjectDb(): Promise<AuditProject> {
 
   // Map to AuditProject type
   const assessmentsRecord: Record<string, any> = {};
-  p.assessments.forEach(a => {
+  p.assessments.forEach((a: any) => {
     assessmentsRecord[a.criteriaCode] = {
       status: a.status,
       findingNotes: a.findingNotes || ''
@@ -35,7 +35,7 @@ export async function loadLatestProjectDb(): Promise<AuditProject> {
   });
 
   const capItemsRecord: Record<string, any> = {};
-  p.capItems.forEach(c => {
+  p.capItems.forEach((c: any) => {
     capItemsRecord[c.criteriaCode] = {
       rootCause: c.rootCause || '',
       correctiveAction: c.correctiveAction || '',

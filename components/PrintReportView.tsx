@@ -97,10 +97,6 @@ export const PrintReportView: React.FC<PrintReportViewProps> = ({
                 </td>
               </tr>
               <tr>
-                <td className="p-2 font-semibold bg-[#FAF9F6] border border-[var(--border-default)]">Peluang Peningkatan (OFI)</td>
-                <td className="p-2 border border-[var(--border-default)] font-mono text-right">{score.totalOfi}</td>
-              </tr>
-              <tr>
                 <td className="p-2 font-semibold bg-[#FAF9F6] border border-[var(--border-default)]">Ketidaksesuaian Minor</td>
                 <td className="p-2 border border-[var(--border-default)] font-mono text-right">{score.totalMinor}</td>
               </tr>
